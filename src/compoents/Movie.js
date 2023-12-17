@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-function Movie() { 
-  const [movieList, setMovieList] = useState([]);
+function Movie({ m }) {
+  const [movieList, setMovieList] = useState(m);
 
   const getMovie = () => {
     fetch(
@@ -11,50 +11,55 @@ function Movie() {
       .then((json) => setMovieList(json.results));
   };
 
+
   useEffect(() => {
-    getMovie();
-  }, []);
+    setMovieList(m);
+  }, [m]);
 
   const api_img = "https://image.tmdb.org/t/p/w500";
   return (
     <div className="container mt-5">
       <h2 className="text-center">MovieFlix</h2>
       <div className="row justify-content-center">
-        {movieList.map((movie, index) => (
-          <div key={index} className="col-lg-4 col-md-6 col-sm-12 mb-4">
-            <div className="card movie_card">
-              <img
-                src={api_img + movie.poster_path}
-                alt={movie.title}
-                style={{
-                  width: "300px",
-                  height: "250px",
-                  marginLeft: "10px",
-                  marginTop: "10px",
-                }}
-                className="card-img-top"
-              />
-              <div className="card-body">
-                <h5 className="card-title">{movie.title}</h5>
-                <span className="movie_info">{movie.overview}</span>
-                <span className="movie_info">{movie.popularity}</span>
-
-                <br />
-                <span className="movie_info">
-                  Released on: {movie.release_date}
-                </span>
-                <br />
-                <span className="movie_info float-right">
-                  Vote: {movie.vote}
-                </span>
-                <span className="movie_info">{movie.vote_count}</span>
-                <br />
+        {movieList.length === 0 ? (
+          <div>{getMovie()}</div>
+        ) : (
+          movieList.map((movie, index) => (
+            <div key={index} className="col-lg-4 col-md-6 col-sm-12 mb-4">
+              <div className="card movie_card">
+                <img
+                  src={api_img + movie.poster_path}
+                  alt={movie.title}
+                  style={{
+                    width: "300px",
+                    height: "250px",
+                    marginLeft: "10px",
+                    marginTop: "10px",
+                  }}
+                  className="card-img-top"
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{movie.title}</h5>
+                  <span className="movie_info">{movie.overview}</span>
+                  <span className="movie_info">{movie.popularity}</span>
+                  <br />
+                  <span className="movie_info">
+                    Released on: {movie.release_date}
+                  </span>
+                  <br />
+                  <span className="movie_info float-right">
+                    Vote: {movie.vote}
+                  </span>
+                  <span className="movie_info">{movie.vote_count}</span>
+                  <br />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
 }
+
 export default Movie;
