@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Movie() {
+function Movie() { 
   const [movieList, setMovieList] = useState([]);
 
   const getMovie = () => {
@@ -21,7 +21,7 @@ function Movie() {
       <h2 className="text-center">MovieFlix</h2>
       <div className="row justify-content-center">
         {movieList.map((movie, index) => (
-          <div key={index} className="col-md-4 mb-4">
+          <div key={index} className="col-lg-4 col-md-6 col-sm-12 mb-4">
             <div className="card movie_card">
               <img
                 src={api_img + movie.poster_path}

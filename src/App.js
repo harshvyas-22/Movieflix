@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import Movie from "./compoents/Movie";
 
-function App() {
+function App() { 
   const api_search =
     "https://api.themoviedb.org/3/search/movie?api_key=55a873b5a2d9c79525db8ddeca08cb35&query=";
   const [movies, setMovies] = useState([]);
